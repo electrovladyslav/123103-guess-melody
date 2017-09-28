@@ -1,7 +1,7 @@
 # Личный проект «Угадай мелодию» [![Build status][travis-image]][travis-url]
 
 * Студент: [Владислав Ермолин](https://up.htmlacademy.ru/ecmascript/3/user/123103).
-* Наставник: `Неизвестно`.
+* Наставник: [Михаил Баранов](https://htmlacademy.ru/profile/h4).
 
 ---
 
