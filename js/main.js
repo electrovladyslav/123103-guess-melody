@@ -1,14 +1,10 @@
 (function () {
-  function getScreens() {
-    const template = document.querySelector(`template`);
-    const arr = [];
-    template.content.querySelectorAll(`.main`).forEach((item) => {
-      arr.push(item);
-    });
-    return arr;
-  }
-
-  const screens = getScreens();
+  const template = document.querySelector(`template`);
+  const screenNodes = template.content.querySelectorAll(`.main`);
+  const screens = [];
+  screenNodes.forEach((screen) => {
+    screens.push(screen);
+  });
 
   function showScreen(screenNumber) {
     const main = document.querySelector(`.main`);
@@ -33,15 +29,22 @@
   });
 
   function switchScreen(direction) {
+    let nextScreen;
     switch (direction) {
       case `next` :
-        if ((currentScreen + 1) < screens.length) {
-          showScreen(++currentScreen);
+        nextScreen = ++currentScreen;
+        if (nextScreen < screens.length) {
+          showScreen(nextScreen);
+        } else {
+          --currentScreen;
         }
         break;
       case `prev` :
-        if ((currentScreen - 1) >= 0) {
-          showScreen(--currentScreen);
+        nextScreen = --currentScreen;
+        if (nextScreen >= 0) {
+          showScreen(nextScreen);
+        } else {
+          ++currentScreen;
         }
         break;
     }
