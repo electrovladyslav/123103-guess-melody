@@ -1,11 +1,11 @@
 /**
  * Make DOM-element from string-template
- * @param {string} tmplString string with HTML template
+ * @param {string} stingTemplate string with HTML template
  * @return {Node} DOM element
  */
-const makeElementFromTemplate = (tmplString) => {
+const makeElementFromTemplate = (stingTemplate) => {
   const template = document.createElement(`template`);
-  template.innerHTML = tmplString;
+  template.innerHTML = stingTemplate;
   return template.content;
 };
 
