@@ -35,6 +35,10 @@ body {
   min-height: $layout-height;
 }
 
+button {
+  cursor: pointer;
+}
+
 .app {
   height: $layout-height;
   position: relative;
