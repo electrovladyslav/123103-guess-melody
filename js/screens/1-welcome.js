@@ -2,8 +2,7 @@ import makeElementFromTemplate from '../functions/makeElementFromTemplate';
 import nextScreen from './2-game-artist';
 import renderScreen from '../functions/renderScreen';
 
-const screen = () => {
-  const stingTemplate = `
+const stingTemplate = `
   <section class="main main--welcome">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
     <button class="main-play">Начать игру</button>
@@ -13,8 +12,10 @@ const screen = () => {
       Ошибиться можно 3 раза.<br>
       Удачи!
     </p>
-  </section>`;
+  </section>
+`;
 
+const screen = () => {
   const domTemplate = makeElementFromTemplate(stingTemplate);
 
   const showNextScreen = () => {
