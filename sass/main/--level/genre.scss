@@ -17,6 +17,7 @@
   background: url("../img/icon-note-inactive.png") no-repeat;
   height: 49px;
   width: 35px;
+  cursor: pointer;
 }
 
 input[type=checkbox]:checked + .genre-answer-check {
@@ -35,7 +36,8 @@ input[type=checkbox]:checked + .genre-answer-check {
   text-align: center;
 }
 
-.genre-answer-send:disabled {
+.genre-answer-send:disabled,
+.genre-answer-send:disabled:hover {
   color: $color-text-grey;
   border: 4px solid lighten($color-orange, 15%);
 }
