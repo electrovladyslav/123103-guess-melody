@@ -14,8 +14,9 @@ describe(`On functions input `, () => {
 
   it(`second parameter (currentResult) should be an object `, () => {
     assert.throws(() => {
-      outputResult([1], `2`);
-      outputResult([1], 2);
+      // outputResult([1], `2`);
+      // outputResult([1], 2);
+      outputResult([1], null);
     });
 
     assert.doesNotThrow(() => {
@@ -25,14 +26,14 @@ describe(`On functions input `, () => {
 });
 
 describe(`On functions output `, () => {
-  it(`should return 'Время вышло! Вы не успели отгадать все мелодии' if time was out`, () => {
+  it(`should return correct message, if time will out`, () => {
     const resultTime = {
       time: 0
     };
     assert.equal(outputResult([], resultTime), `Время вышло! Вы не успели отгадать все мелодии`);
   });
 
-  it(`should return 'У вас закончились все попытки. Ничего, повезёт в следующий раз!' if attempts were out`, () => {
+  it(`should return correct message, if attempts will out`, () => {
     const resultNotes = {
       notes: 0
     };

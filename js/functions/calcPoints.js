@@ -7,7 +7,7 @@
 export default (answers, notes) => {
   let result = 0;
 
-  if (Array.isArray(answers) !== true) {
+  if (!Array.isArray(answers)) {
     throw new TypeError(`It should be an Array of answers on input`);
   }
 
