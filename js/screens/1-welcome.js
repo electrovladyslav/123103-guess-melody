@@ -1,6 +1,7 @@
 import makeElementFromTemplate from '../functions/makeElementFromTemplate';
 import nextScreen from './2-game-artist';
 import renderScreen from '../functions/renderScreen';
+import game from '../data/game';
 
 const stingTemplate = `
   <section class="main main--welcome">
@@ -8,8 +9,8 @@ const stingTemplate = `
     <button class="main-play">Начать игру</button>
     <h2 class="title main-title">Правила игры</h2>
     <p class="text main-text">
-      Правила просты&nbsp;— за&nbsp;5 минут ответить на все вопросы.<br>
-      Ошибиться можно 3 раза.<br>
+      Правила просты&nbsp;— за&nbsp;${game.rules.time} минут ответить на все вопросы.<br>
+      Ошибиться можно ${game.rules.lives} раза.<br>
       Удачи!
     </p>
   </section>

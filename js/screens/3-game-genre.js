@@ -3,8 +3,11 @@ import resultScreenWin from './4-result-win';
 import resultScreenLooseTime from './5-result-loose-time';
 import resultScreenLooseAttempt from './6-result-loose-attempt';
 import renderScreen from '../functions/renderScreen';
+import getRandomArrElem from '../functions/getRandomArrElem';
+import game from '../data/game';
 
-const stingTemplate = `
+const thisLevel = game.levelVariant.genre;
+let stingTemplate = `
   <section class="main main--level main--level-genre">
     <svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
       <circle
@@ -25,64 +28,29 @@ const stingTemplate = `
     </div>
   
     <div class="main-wrap">
-      <h2 class="title">Выберите инди-рок треки</h2>
-      <form class="genre">
-        <div class="genre-answer">
-          <div class="player-wrapper">
-            <div class="player">
-              <audio></audio>
-              <button class="player-control player-control--pause"></button>
-              <div class="player-track">
-                <span class="player-status"></span>
-              </div>
-            </div>
+      <h2 class="title">${thisLevel.title}</h2>
+      <form class="genre">`;
+
+const answersList = thisLevel.answers.map((answer, number) => {
+  return `
+    <div class="genre-answer">
+      <div class="player-wrapper">
+        <div class="player">
+          <audio src="${answer.src}"></audio>
+          <button class="player-control player-control--pause"></button>
+          <div class="player-track">
+            <span class="player-status"></span>
           </div>
-          <input type="checkbox" name="answer" value="answer-1" id="a-1">
-          <label class="genre-answer-check" for="a-1"></label>
         </div>
-  
-        <div class="genre-answer">
-          <div class="player-wrapper">
-            <div class="player">
-              <audio></audio>
-              <button class="player-control player-control--play"></button>
-              <div class="player-track">
-                <span class="player-status"></span>
-              </div>
-            </div>
-          </div>
-          <input type="checkbox" name="answer" value="answer-1" id="a-2">
-          <label class="genre-answer-check" for="a-2"></label>
-        </div>
-  
-        <div class="genre-answer">
-          <div class="player-wrapper">
-            <div class="player">
-              <audio></audio>
-              <button class="player-control player-control--play"></button>
-              <div class="player-track">
-                <span class="player-status"></span>
-              </div>
-            </div>
-          </div>
-          <input type="checkbox" name="answer" value="answer-1" id="a-3">
-          <label class="genre-answer-check" for="a-3"></label>
-        </div>
-  
-        <div class="genre-answer">
-          <div class="player-wrapper">
-            <div class="player">
-              <audio></audio>
-              <button class="player-control player-control--play"></button>
-              <div class="player-track">
-                <span class="player-status"></span>
-              </div>
-            </div>
-          </div>
-          <input type="checkbox" name="answer" value="answer-1" id="a-4">
-          <label class="genre-answer-check" for="a-4"></label>
-        </div>
-  
+      </div>
+      <input type="checkbox" name="answer" value="answer-${number}" id="a-${number}">
+      <label class="genre-answer-check" for="a-${number}"></label>
+    </div>
+  `;
+}).join(``);
+
+stingTemplate += answersList;
+stingTemplate += `
         <button class="genre-answer-send" type="submit" disabled>Ответить</button>
       </form>
     </div>
@@ -99,11 +67,7 @@ const screen = () => {
       resultScreenLooseAttempt()
     ];
 
-    const getRandomScreen = () => {
-      return finalScreens[Math.floor(Math.random() * finalScreens.length)];
-    };
-
-    renderScreen(getRandomScreen());
+    renderScreen(getRandomArrElem(finalScreens));
   };
 
   const mainTrigger = domTemplate.querySelector(`.genre-answer-send`);
