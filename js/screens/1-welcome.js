@@ -1,7 +1,7 @@
 import makeElementFromTemplate from '../functions/makeElementFromTemplate';
 import nextScreen from './2-game-artist';
 import renderScreen from '../functions/renderScreen';
-import game from '../data/game';
+import initialState from '../data/initialState';
 
 const stingTemplate = `
   <section class="main main--welcome">
@@ -9,8 +9,8 @@ const stingTemplate = `
     <button class="main-play">Начать игру</button>
     <h2 class="title main-title">Правила игры</h2>
     <p class="text main-text">
-      Правила просты&nbsp;— за&nbsp;${game.rules.time} минут ответить на все вопросы.<br>
-      Ошибиться можно ${game.rules.lives} раза.<br>
+      Правила просты&nbsp;— за&nbsp;${initialState.time} минут ответить на все вопросы.<br>
+      Ошибиться можно ${initialState.lives} раза.<br>
       Удачи!
     </p>
   </section>
@@ -20,7 +20,7 @@ const screen = () => {
   const domTemplate = makeElementFromTemplate(stingTemplate);
 
   const showNextScreen = () => {
-    renderScreen(nextScreen());
+    renderScreen(nextScreen(initialState));
   };
 
   const trigger = domTemplate.querySelector(`.main-play`);

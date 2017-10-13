@@ -28,8 +28,7 @@ const game = {
       rightAnswer: audio[5]
     }
   },
-  questions: [],
-  answers: []
+  levelsAmount: 10
 };
 
 export default game;

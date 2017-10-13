@@ -1,8 +1,8 @@
 /**
  * Calculate points witch give to player depends of his answers
- * @param {Array} answers
- * @param {Number} notes
- * @return {Number} result
+ * @param {array} answers
+ * @param {number} notes
+ * @return {number} result
  */
 export default (answers, notes) => {
   let result = 0;
