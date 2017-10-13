@@ -25,7 +25,9 @@ const game = {
         audio[3],
         audio[4]
       ],
-      rightAnswer: audio[5]
+      rightAnswer: new Set([
+        audio[5].artist
+      ])
     }
   },
   levelsAmount: 10

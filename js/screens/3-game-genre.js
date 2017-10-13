@@ -1,5 +1,7 @@
 import makeElementFromTemplate from '../functions/makeElementFromTemplate';
 import switchLevel from '../functions/switchLevel';
+import decreaseLife from '../functions/decreaseLife';
+import isSetsEqual from '../functions/isSetsEqual';
 import game from '../data/game';
 
 const screen = (state) => {
@@ -38,8 +40,8 @@ const screen = (state) => {
             </div>
           </div>
         </div>
-        <input type="checkbox" name="answer" value="answer-${number}" id="a-${number}">
-        <label class="genre-answer-check" for="a-${number}"></label>
+        <input type="checkbox" name="answer" value="answer-${number}" id="a-${number}" data-artist="${answer.artist}">
+        <label class="genre-answer-check" for="a-${number}" data-artist="${answer.artist}"></label>
       </div>
     `;
   }).join(``);
@@ -57,28 +59,43 @@ const screen = (state) => {
 
   const mainTrigger = domTemplate.querySelector(`.genre-answer-send`);
   const auxTriggers = domTemplate.querySelectorAll(`input[name="answer"]`);
+  const auxTriggersStore = new Set();
 
-  const changeMainTrigger = () => {
-    let checkedFlag = false;
-    [...auxTriggers].forEach((trigger) => {
-      if (trigger.checked) {
-        checkedFlag = true;
-      }
-    });
-    mainTrigger.disabled = !checkedFlag;
+  const onChoose = (event) => {
+    if (auxTriggersStore.has(event.target.dataset.artist)) {
+      auxTriggersStore.delete(event.target.dataset.artist);
+    } else {
+      auxTriggersStore.add(event.target.dataset.artist);
+    }
+    mainTrigger.disabled = !auxTriggersStore.size;
+  };
+
+  const onAnswer = () => {
+    let newState = Object.assign({}, state);
+    if (isSetsEqual(auxTriggersStore, thisLevel.rightAnswer)) {
+      newState.answers.push(`correct`);
+    } else {
+      newState.answers.push(`wrong`);
+      newState = decreaseLife(newState);
+    }
+    switchLevel(newState);
   };
 
   if (auxTriggers.length) {
     [...auxTriggers].forEach((trigger) => {
-      trigger.addEventListener(`change`, changeMainTrigger);
+      trigger.addEventListener(`change`, (event) => {
+        onChoose(event);
+      });
     });
   } else {
     throw new Error(`There is no possible to switch level (no-triggers).`);
   }
 
   mainTrigger.addEventListener(`click`, () => {
-    switchLevel(state);
+    event.preventDefault();
+    onAnswer(event);
   });
+
   return domTemplate;
 };
 

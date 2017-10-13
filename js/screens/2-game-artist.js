@@ -43,7 +43,7 @@ const screen = (state) => {
     return `
       <div class="main-answer-wrapper">
       <input class="main-answer-r" type="radio" id="answer-${number}" name="answer" value="val-${number}"/>
-      <label class="main-answer" for="answer-${number}">
+      <label class="main-answer" for="answer-${number}"  data-artist="${answer}">
         <img class="main-answer-preview" src="http://placehold.it/134x134"
              alt="${answer}" width="134" height="134">
         ${answer}
@@ -64,7 +64,7 @@ const screen = (state) => {
 
   const onAnswer = (event) => {
     let newState = Object.assign({}, state);
-    if (event.target.alt === thisLevel.rightAnswer) {
+    if (event.currentTarget.dataset.artist === thisLevel.rightAnswer) {
       newState.answers.push(`correct`);
     } else {
       newState.answers.push(`wrong`);
