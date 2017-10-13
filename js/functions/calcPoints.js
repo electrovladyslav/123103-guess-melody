@@ -1,3 +1,5 @@
+import initialState from '../data/initialState';
+
 /**
  * Calculate points witch give to player depends of his answers
  * @param {array} answers
@@ -15,7 +17,7 @@ export default (answers, notes) => {
     throw new TypeError(`It should be an Number of notes on input`);
   }
 
-  if (answers.length < 10) {
+  if (answers.length < initialState.levelsAmount) {
     result = -1;
     return result;
   }

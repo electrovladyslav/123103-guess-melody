@@ -1,11 +1,11 @@
 import makeElementFromTemplate from '../functions/makeElementFromTemplate';
 import decreaseLife from '../functions/decreaseLife';
 import switchLevel from '../functions/switchLevel';
-import game from '../data/game';
+import levelVariant from '../data/levelVariants';
 
 
 const screen = (state) => {
-  const thisLevel = game.levelVariant.artist;
+  const thisLevel = levelVariant.artist;
   let stringTemplate = `
     <section class="main main--level main--level-artist">
       <svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">

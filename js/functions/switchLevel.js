@@ -27,6 +27,6 @@ export default (state) => {
   if (newState.currentLevel < newState.levelsAmount) {
     renderScreen(getRandomArrElem(nextLevels));
   } else if (newState.currentLevel === newState.levelsAmount) {
-    renderScreen(resultScreenWin());
+    renderScreen(resultScreenWin(newState));
   }
 };

@@ -2,10 +2,10 @@ import makeElementFromTemplate from '../functions/makeElementFromTemplate';
 import switchLevel from '../functions/switchLevel';
 import decreaseLife from '../functions/decreaseLife';
 import isSetsEqual from '../functions/isSetsEqual';
-import game from '../data/game';
+import levelVariant from '../data/levelVariants';
 
 const screen = (state) => {
-  const thisLevel = game.levelVariant.genre;
+  const thisLevel = levelVariant.genre;
   let stringTemplate = `
     <section class="main main--level main--level-genre">
       <svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
