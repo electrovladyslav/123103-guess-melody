@@ -11,7 +11,7 @@ const screen = (state) => {
     points
   });
   const resultPhrase = outputResult(OTHER_RESULTS_MOCK, newState);
-  // Вы заняли 2 место из 10. Это&nbsp;лучше чем у&nbsp;80%&nbsp;игроков
+
   const stringTemplate = `
     <section class="main main--result">
       <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>

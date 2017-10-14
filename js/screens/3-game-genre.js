@@ -6,6 +6,8 @@ import levelVariant from '../data/levelVariants';
 
 const screen = (state) => {
   const thisLevel = levelVariant.genre;
+  const livesSrting = new Array(state.lives).fill(`<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`).join(``);
+
   let stringTemplate = `
     <section class="main main--level main--level-genre">
       <svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
@@ -21,7 +23,7 @@ const screen = (state) => {
         </div>
       </svg>
       <div class="main-mistakes">
-        ${new Array(state.lives).fill(`<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`).join(``)}
+        ${livesSrting}
       </div>
     
       <div class="main-wrap">

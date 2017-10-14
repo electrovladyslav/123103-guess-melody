@@ -1,5 +1,4 @@
 import audio from './audioLib';
-// import getRandomArrElem from '../functions/getRandomArrElem';
 
 export default Object.freeze({
   artist: {
