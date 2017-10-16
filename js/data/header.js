@@ -1,6 +1,7 @@
 import makeElementFromTemplate from '../functions/makeElementFromTemplate';
 
 const header = (state) => {
+  const livesString = new Array(state.lives).fill(`<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`).join(``);
   let stringTemplate = `
   <svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
       <circle
@@ -16,7 +17,7 @@ const header = (state) => {
     </svg>
     
     <div class="main-mistakes">
-      ${new Array(state.lives).fill(`<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`).join(``)}
+      ${livesString}
     </div>
   `;
 
