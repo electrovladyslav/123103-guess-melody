@@ -2,7 +2,7 @@ import makeElementFromTemplate from '../functions/makeElementFromTemplate';
 import nextScreen from './1-welcome';
 import renderScreen from '../functions/renderScreen';
 
-const stingTemplate = `
+const stringTemplate = `
   <section class="main main--result">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
 
@@ -13,7 +13,7 @@ const stingTemplate = `
 `;
 
 const screen = () => {
-  const domTemplate = makeElementFromTemplate(stingTemplate);
+  const domTemplate = makeElementFromTemplate(stringTemplate);
 
   const showNextScreen = () => {
     renderScreen(nextScreen());
