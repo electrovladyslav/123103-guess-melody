@@ -1,5 +1,5 @@
 import artistScreen from '../screens/2-game-artist/gameArtist';
-import genreScreen from '../screens/3-game-genre';
+import genreScreen from '../screens/3-game-genre/gameGenre';
 import resultScreenWin from '../screens/4-result-win';
 import resultScreenLooseTime from '../screens/5-result-loose-time';
 import resultScreenLooseAttempt from '../screens/6-result-loose-attempt';

@@ -1,11 +1,11 @@
 import AbstractView from '../../view/AbstractView';
 import levelVariant from '../../data/levelVariants';
 
-export default class GameArtistView extends AbstractView {
+export default class GameGenreView extends AbstractView {
   constructor(state) {
     super();
     this._state = state;
-    this._level = levelVariant.artist;
+    this._level = levelVariant.genre;
   }
 
   get template() {
@@ -31,54 +31,66 @@ export default class GameArtistView extends AbstractView {
       </div>
   
       <div class="main-wrap">
-        <h2 class="title main-title">${this._level.title}</h2>
+        <h2 class="title">${this._level.title}</h2>
+        <form class="genre">`;
+
+    const answersList = this._level.answers.map((answer, number) => {
+      return `
+      <div class="genre-answer">
         <div class="player-wrapper">
           <div class="player">
-            <audio src="${this._level.audio.src}"></audio>
+            <audio src="${answer.src}"></audio>
             <button class="player-control player-control--pause"></button>
             <div class="player-track">
               <span class="player-status"></span>
             </div>
           </div>
         </div>
-        
-        <form class="main-list">`;
-
-    const answersList = this._level.answers.map((answer, number) => {
-      return `
-      <div class="main-answer-wrapper">
-      <input class="main-answer-r" type="radio" id="answer-${number}" name="answer" value="val-${number}"/>
-      <label class="main-answer" for="answer-${number}"  data-artist="${answer}">
-        <img class="main-answer-preview" src="http://placehold.it/134x134"
-             alt="${answer}" width="134" height="134">
-        ${answer}
-      </label>
-    </div>
+        <input type="checkbox" name="answer" value="answer-${number}" id="a-${number}" data-artist="${answer.artist}">
+        <label class="genre-answer-check" for="a-${number}" data-artist="${answer.artist}"></label>
+      </div>
     `;
     }).join(``);
 
     stringTemplate += answersList;
-
     stringTemplate += `
+          <button class="genre-answer-send" type="submit" disabled>Ответить</button>
         </form>
       </div>
     </section>
   `;
+
     return stringTemplate;
   }
 
   bind() {
-    const triggers = this._element.querySelectorAll(`.main-answer`);
-    if (triggers.length) {
-      [...triggers].forEach((trigger) => {
-        trigger.addEventListener(`click`, (event) => {
-          event.preventDefault();
-          this.onAnswer(event);
+    const mainTrigger = this._element.querySelector(`.genre-answer-send`);
+    const auxTriggers = this._element.querySelectorAll(`input[name="answer"]`);
+    this._auxTriggersStore = new Set();
+
+    const onChoose = (event) => {
+      if (this._auxTriggersStore.has(event.target.dataset.artist)) {
+        this._auxTriggersStore.delete(event.target.dataset.artist);
+      } else {
+        this._auxTriggersStore.add(event.target.dataset.artist);
+      }
+      mainTrigger.disabled = !this._auxTriggersStore.size;
+    };
+
+    if (auxTriggers.length) {
+      [...auxTriggers].forEach((trigger) => {
+        trigger.addEventListener(`change`, (event) => {
+          onChoose(event);
         });
       });
     } else {
       throw new Error(`There is no possible to switch level (no-triggers).`);
     }
+
+    mainTrigger.addEventListener(`click`, () => {
+      event.preventDefault();
+      this.onAnswer(event);
+    });
   }
 
   onAnswer() {
