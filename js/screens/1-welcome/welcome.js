@@ -1,4 +1,4 @@
-import nextScreen from '../2-game-artist';
+import nextScreen from '../2-game-artist/gameArtist';
 import renderScreen from '../../functions/renderScreen';
 import WelcomeView from './welcomeView';
 import initialState from '../../data/initialState';
