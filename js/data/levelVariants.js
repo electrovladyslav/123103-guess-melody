@@ -1,7 +1,7 @@
 import audio from './audioLib';
 
 export default Object.freeze({
-  artist: {
+  'artist': {
     title: `Кто исполняет эту песню?`,
     audio: audio[1],
     answers: [
@@ -11,7 +11,7 @@ export default Object.freeze({
     ],
     rightAnswer: audio[1].artist
   },
-  genre: {
+  'genre': {
     title: `Выберите поп треки`,
     answers: [
       audio[5],
@@ -22,5 +22,14 @@ export default Object.freeze({
     rightAnswer: new Set([
       audio[5].artist
     ])
+  },
+  'result-win': {
+    title: `Вы настоящий меломан!`
+  },
+  'result-loose-time': {
+    title: `Увы и ах!`
+  },
+  'result-loose-attempt': {
+    title: `Какая жалость!`
   }
 });
