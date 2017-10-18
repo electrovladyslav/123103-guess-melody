@@ -31,14 +31,14 @@ describe(`On functions output `, () => {
     const resultTime = {
       time: 0
     };
-    assert.equal(outputResult([], resultTime), `Время вышло! Вы не успели отгадать все мелодии`);
+    assert.equal(outputResult([], resultTime), `Время вышло!<br>Вы не успели отгадать все мелодии`);
   });
 
   it(`should return correct message, if attempts will out`, () => {
     const resultNotes = {
       lives: 0
     };
-    assert.equal(outputResult([], resultNotes), `У вас закончились все попытки. Ничего, повезёт в следующий раз!`);
+    assert.equal(outputResult([], resultNotes), `У вас закончились все попытки.<br>Ничего, повезёт в следующий раз!`);
   });
 });
 
