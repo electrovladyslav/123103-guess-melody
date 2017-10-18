@@ -14,7 +14,7 @@ export default (state) => {
     renderScreen(resultScreen(newState));
     return;
   }
-  if (state.time === 0) {
+  if (state.time <= 0) {
     newState.result = `loose-attempt`;
     renderScreen(resultScreen(newState));
     return;

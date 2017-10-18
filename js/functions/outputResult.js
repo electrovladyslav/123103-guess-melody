@@ -18,13 +18,13 @@ export default (otherResults, currentResult) => {
     throw new TypeError(`It should be an Oject of current result on input`);
   }
 
-  if (currentResult.time === 0) {
-    outputString = `Время вышло! Вы не успели отгадать все мелодии`;
+  if (currentResult.time <= 0) {
+    outputString = `Время вышло!<br>Вы не успели отгадать все мелодии`;
     return outputString;
   }
 
   if (currentResult.lives === 0) {
-    outputString = `У вас закончились все попытки. Ничего, повезёт в следующий раз!`;
+    outputString = `У вас закончились все попытки.<br>Ничего, повезёт в следующий раз!`;
     return outputString;
   }
 

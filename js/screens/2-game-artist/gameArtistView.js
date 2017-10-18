@@ -9,6 +9,12 @@ export default class GameArtistView extends AbstractView {
   }
 
   get template() {
+    const timeMins = Math.floor(this._state.time / 60);
+    let timeSecs = this._state.time % 60;
+    if (timeSecs < 10) {
+      timeSecs = `0` + timeSecs;
+    }
+
     const livesString = new Array(this._state.lives).fill(`<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`).join(``);
 
     let stringTemplate = `
@@ -20,9 +26,9 @@ export default class GameArtistView extends AbstractView {
           style="filter: url(.#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"></circle>
   
         <div class="timer-value" xmlns="http://www.w3.org/1999/xhtml">
-          <span class="timer-value-mins">${this._state.time}</span><!--
+          <span class="timer-value-mins">${timeMins}</span><!--
           --><span class="timer-value-dots">:</span><!--
-          --><span class="timer-value-secs">00</span>
+          --><span class="timer-value-secs">${timeSecs}</span>
         </div>
       </svg>
       
@@ -68,6 +74,8 @@ export default class GameArtistView extends AbstractView {
   }
 
   bind() {
+    this.timeElementMins = this._element.querySelector(`.timer-value-mins`);
+    this.timeElementSecs = this._element.querySelector(`.timer-value-secs`);
     const triggers = this._element.querySelectorAll(`.main-answer`);
     if (triggers.length) {
       [...triggers].forEach((trigger) => {
@@ -78,6 +86,19 @@ export default class GameArtistView extends AbstractView {
       });
     } else {
       throw new Error(`There is no possible to switch level (no-triggers).`);
+    }
+  }
+  updateTime(time) {
+    const timeMins = Math.floor(time / 60);
+    let timeSecs = time % 60;
+    if (timeSecs < 10) {
+      timeSecs = `0` + timeSecs;
+    }
+    this.timeElementMins.textContent = timeMins;
+    this.timeElementSecs.textContent = timeSecs;
+
+    if (time === 30) {
+      this.timeElementMins.parentNode.classList.add(`timer-value--finished`);
     }
   }
 
