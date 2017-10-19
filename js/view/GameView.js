@@ -40,7 +40,7 @@ export default class GameView extends AbstractView {
     }
   }
 
-  updateTime(time) {
+  updateTimeOnScreen(time) {
     const timeMins = Math.floor(time / 60);
     let timeSecs = time % 60;
     if (timeSecs < 10) {

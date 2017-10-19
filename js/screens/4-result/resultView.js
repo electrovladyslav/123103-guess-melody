@@ -1,5 +1,4 @@
 import AbstractView from '../../view/AbstractView';
-import levelVariant from '../../data/levelVariants';
 import calcPoints from '../../functions/calcPoints';
 import outputResult from '../../functions/outputResult';
 import OTHER_RESULTS_MOCK from '../../data/otherResultsMock';

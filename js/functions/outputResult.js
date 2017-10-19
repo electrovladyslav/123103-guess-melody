@@ -1,6 +1,6 @@
 /**
  * Output result of current game
- * @param {array} otherResults
+ * @param {number[]} otherResults
  * @param {object} currentResult
  * @param {number} currentResult.points
  * @param {number} currentResult.lives
