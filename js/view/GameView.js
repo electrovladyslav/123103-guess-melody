@@ -9,6 +9,35 @@ export default class GameView extends AbstractView {
   bind() {
     this.timeElementMins = this._element.querySelector(`.timer-value-mins`);
     this.timeElementSecs = this._element.querySelector(`.timer-value-secs`);
+    this.addPlayLogic();
+  }
+
+  addPlayLogic() {
+    const playButtons = this._element.querySelectorAll(`.player-control`);
+    this.playingNow = null;
+    [...playButtons].forEach((button) => {
+      button.addEventListener(`click`, (event) => {
+        event.preventDefault();
+        this.playPause(event.target);
+      });
+    });
+  }
+
+  playPause(element) {
+    if (element.classList.contains(`player-control--pause`)) {
+      if (this.playingNow) {
+        this.playingNow.pause();
+      }
+      element.previousElementSibling.play();
+      this.playingNow = element.previousElementSibling;
+      element.classList.remove(`player-control--pause`);
+      element.classList.add(`player-control--play`);
+    } else {
+      element.previousElementSibling.pause();
+      this.playingNow = null;
+      element.classList.remove(`player-control--play`);
+      element.classList.add(`player-control--pause`);
+    }
   }
 
   updateTime(time) {
