@@ -8,17 +8,16 @@ export default class ResultView extends AbstractView {
   constructor(state) {
     super();
     this._state = state;
+  }
 
+  get title() {
     switch (this._state.result) {
       case `win`:
-        this._level = levelVariant[`result-win`];
-        break;
+        return `Вы настоящий меломан!`;
       case `loose-time`:
-        this._level = levelVariant[`result-loose-time`];
-        break;
+        return `Увы и ах!`;
       case `loose-attempt`:
-        this._level = levelVariant[`result-loose-attempt`];
-        break;
+        return `Какая жалость!`;
       default:
         throw new TypeError(`Wrong result type!`);
     }
@@ -35,7 +34,7 @@ export default class ResultView extends AbstractView {
       <section class="main main--result">
       <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
 
-      <h2 class="title">${this._level.title}</h2>
+      <h2 class="title">${this.title}</h2>
       <div class="main-stat">
     `;
     if (this._state.result === `win`) {
