@@ -1,7 +1,7 @@
-import AbstractView from '../../view/AbstractView';
+import GameView from '../../view/GameView';
 import levelVariant from '../../data/levelVariants';
 
-export default class GameArtistView extends AbstractView {
+export default class GameArtistView extends GameView {
   constructor(state) {
     super();
     this._state = state;
@@ -74,8 +74,7 @@ export default class GameArtistView extends AbstractView {
   }
 
   bind() {
-    this.timeElementMins = this._element.querySelector(`.timer-value-mins`);
-    this.timeElementSecs = this._element.querySelector(`.timer-value-secs`);
+    super.bind();
     const triggers = this._element.querySelectorAll(`.main-answer`);
     if (triggers.length) {
       [...triggers].forEach((trigger) => {
@@ -86,19 +85,6 @@ export default class GameArtistView extends AbstractView {
       });
     } else {
       throw new Error(`There is no possible to switch level (no-triggers).`);
-    }
-  }
-  updateTime(time) {
-    const timeMins = Math.floor(time / 60);
-    let timeSecs = time % 60;
-    if (timeSecs < 10) {
-      timeSecs = `0` + timeSecs;
-    }
-    this.timeElementMins.textContent = timeMins;
-    this.timeElementSecs.textContent = timeSecs;
-
-    if (time === 30) {
-      this.timeElementMins.parentNode.classList.add(`timer-value--finished`);
     }
   }
 

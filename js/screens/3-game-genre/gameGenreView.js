@@ -1,10 +1,9 @@
-import AbstractView from '../../view/AbstractView';
+import GameView from '../../view/GameView';
 import levelVariant from '../../data/levelVariants';
 
-export default class GameGenreView extends AbstractView {
+export default class GameGenreView extends GameView {
   constructor(state) {
-    super();
-    this._state = state;
+    super(state);
     this._level = levelVariant.genre;
   }
 
@@ -70,8 +69,7 @@ export default class GameGenreView extends AbstractView {
   }
 
   bind() {
-    this.timeElementMins = this._element.querySelector(`.timer-value-mins`);
-    this.timeElementSecs = this._element.querySelector(`.timer-value-secs`);
+    super.bind();
     const mainTrigger = this._element.querySelector(`.genre-answer-send`);
     const auxTriggers = this._element.querySelectorAll(`input[name="answer"]`);
     this._auxTriggersStore = new Set();
@@ -101,19 +99,6 @@ export default class GameGenreView extends AbstractView {
     });
   }
 
-  updateTime(time) {
-    const timeMins = Math.floor(time / 60);
-    let timeSecs = time % 60;
-    if (timeSecs < 10) {
-      timeSecs = `0` + timeSecs;
-    }
-    this.timeElementMins.textContent = timeMins;
-    this.timeElementSecs.textContent = timeSecs;
-
-    if (time === 30) {
-      this.timeElementMins.parentNode.classList.add(`timer-value--finished`);
-    }
-  }
 
   onAnswer() {
   }
