@@ -1,15 +1,16 @@
-import GameArtistView from './gameArtistView';
+import GameGenreView from './gameGenreView';
 import decreaseLife from '../../functions/decreaseLife';
 import switchLevel from '../../functions/switchLevel';
+import isSetsEqual from '../../functions/isSetsEqual';
 import updateTimeInState from '../../functions/updateTimeInState';
 import timer from '../../functions/timer';
 import renderScreen from '../../functions/renderScreen';
 import GameScreen from '../gameScreen';
 
-class GameArtistScreen extends GameScreen {
+class GameGenreScreen extends GameScreen {
   constructor(state) {
     super(state);
-    this._view = new GameArtistView(state);
+    this._view = new GameGenreView(state);
   }
 
   init() {
@@ -17,13 +18,12 @@ class GameArtistScreen extends GameScreen {
     this._view.onAnswer = () => {
       clearInterval(this._timerId);
       let newState = Object.assign({}, this._state);
-      if (event.currentTarget.dataset.artist === this._view._level.rightAnswer) {
+      if (isSetsEqual(this._view._auxTriggersStore, this._view._level.rightAnswer)) {
         newState.answers.push(`correct`);
       } else {
         newState.answers.push(`wrong`);
         newState = decreaseLife(newState);
       }
-
       switchLevel(newState);
     };
 
@@ -31,4 +31,4 @@ class GameArtistScreen extends GameScreen {
   }
 }
 
-export default GameArtistScreen;
+export default GameGenreScreen;
