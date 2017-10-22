@@ -1,7 +1,7 @@
 import nextScreen from '../2-game-artist/gameArtistScreen.js';
 import renderScreen from '../../functions/renderScreen';
+import app from '../../app';
 import WelcomeView from './welcomeView';
-import initialState from '../../data/initialState';
 
 class WelcomeScreen {
   constructor() {
@@ -10,8 +10,7 @@ class WelcomeScreen {
 
   init() {
     this.view.switchToNextScreen = () => {
-      const next = new nextScreen(initialState);
-      next.init();
+      app.startGame();
     };
 
     renderScreen(this.view.element);
