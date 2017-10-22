@@ -1,5 +1,5 @@
-import AbstractView from '../../view/AbstractView';
-import initialState from '../../data/initialState';
+import AbstractView from './AbstractView';
+import initialState from '../data/initialState';
 
 export default class WelcomeView extends AbstractView {
   get template() {

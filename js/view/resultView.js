@@ -1,7 +1,7 @@
-import AbstractView from '../../view/AbstractView';
-import calcPoints from '../../functions/calcPoints';
-import outputResult from '../../functions/outputResult';
-import OTHER_RESULTS_MOCK from '../../data/otherResultsMock';
+import AbstractView from './AbstractView';
+import calcPoints from '../functions/calcPoints';
+import outputResult from '../functions/outputResult';
+import OTHER_RESULTS_MOCK from '../data/otherResultsMock';
 
 export default class ResultView extends AbstractView {
   constructor(state) {

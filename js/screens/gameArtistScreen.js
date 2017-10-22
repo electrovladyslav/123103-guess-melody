@@ -1,10 +1,8 @@
-import GameArtistView from './gameArtistView';
-import decreaseLife from '../../functions/decreaseLife';
-import switchLevel from '../../functions/switchLevel';
-import updateTimeInState from '../../functions/updateTimeInState';
-import timer from '../../functions/timer';
-import renderScreen from '../../functions/renderScreen';
-import GameScreen from '../gameScreen';
+import GameArtistView from '../view/gameArtistView';
+import decreaseLife from '../functions/decreaseLife';
+import renderScreen from '../functions/renderScreen';
+import GameScreen from './gameScreen';
+import app from '../app';
 
 class GameArtistScreen extends GameScreen {
   constructor(state) {
@@ -24,7 +22,7 @@ class GameArtistScreen extends GameScreen {
         newState = decreaseLife(newState);
       }
 
-      switchLevel(newState);
+      app.switchLevel(newState);
     };
 
     renderScreen(this._view.element);

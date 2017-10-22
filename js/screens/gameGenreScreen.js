@@ -1,11 +1,9 @@
-import GameGenreView from './gameGenreView';
-import decreaseLife from '../../functions/decreaseLife';
-import switchLevel from '../../functions/switchLevel';
-import isSetsEqual from '../../functions/isSetsEqual';
-import updateTimeInState from '../../functions/updateTimeInState';
-import timer from '../../functions/timer';
-import renderScreen from '../../functions/renderScreen';
-import GameScreen from '../gameScreen';
+import GameGenreView from '../view/gameGenreView';
+import decreaseLife from '../functions/decreaseLife';
+import isSetsEqual from '../functions/isSetsEqual';
+import renderScreen from '../functions/renderScreen';
+import GameScreen from './gameScreen';
+import app from '../app';
 
 class GameGenreScreen extends GameScreen {
   constructor(state) {
@@ -24,7 +22,7 @@ class GameGenreScreen extends GameScreen {
         newState.answers.push(`wrong`);
         newState = decreaseLife(newState);
       }
-      switchLevel(newState);
+      app.switchLevel(newState);
     };
 
     renderScreen(this._view.element);
