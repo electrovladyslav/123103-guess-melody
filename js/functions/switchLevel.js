@@ -7,12 +7,12 @@ export default (state) => {
   });
 
   if (state.lives === 0) {
-    newState.result = `loose-time`;
+    newState.result = `loose-attempt`;
     app.showResult(newState);
     return;
   }
   if (state.time <= 0) {
-    newState.result = `loose-attempt`;
+    newState.result = `loose-time`;
     app.showResult(newState);
     return;
   }

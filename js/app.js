@@ -9,7 +9,8 @@ import ResultScreen from './screens/resultScreen';
 export default class Application {
 
   static showWelcome() {
-    WelcomeScreen.init();
+    const welcomeScreen = new WelcomeScreen();
+    welcomeScreen.init();
   }
   // TODO сделать тот же набор вопросов,
   // TODO при повторном старте, как в тз
