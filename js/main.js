@@ -1,4 +1,4 @@
-import App from './app';
+import app from './app';
 
-const app = new App();
 app.init();
+// TODO сделать тот же набор вопросов, при повторном старте, как в тз
