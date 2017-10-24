@@ -1,4 +1,3 @@
-import firstScreen from './screens/1-welcome/welcome';
-import renderScreen from './functions/renderScreen';
+import app from './app';
 
-renderScreen(firstScreen());
+app.showWelcome();
