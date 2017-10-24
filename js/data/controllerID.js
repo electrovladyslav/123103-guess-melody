@@ -1,5 +1,6 @@
 export default {
   WELCOME: ``,
-  GAME: `game`,
+  GAME_ARTIST: `game-artist`,
+  GAME_GENRE: `game-genre`,
   RESULT: `result`
 };

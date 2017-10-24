@@ -1,66 +1,71 @@
 import initialState from './data/initialState';
 import controllerID from './data/controllerID';
 import switchLevel from './functions/switchLevel';
-import replaceHashSymbol from './functions/replaceHashSymbol';
+import encodeState from './functions/encodeState';
+import decodeState from './functions/decodeState';
 
 import WelcomeScreen from './screens/welcomeScreen';
 import GameArtistScreen from './screens/gameArtistScreen';
 import GameGenreScreen from './screens/gameGenreScreen';
 import ResultScreen from './screens/resultScreen';
 
+const routes = {
+  [controllerID.WELCOME]: WelcomeScreen,
+  [controllerID.GAME_ARTIST]: GameArtistScreen,
+  [controllerID.GAME_GENRE]: GameGenreScreen,
+  [controllerID.RESULT]: ResultScreen
+};
+
 class Application {
-  constructor() {
-    this.routes = {
-      [controllerID.WELCOME]: WelcomeScreen,
-      [controllerID.GAME]: GameArtistScreen,
-      [controllerID.RESULT]: ResultScreen
+  static init() {
+    const hashChangeHandler = () => {
+      const hashValue = location.hash.replace(`#`, ``);
+      const [id, data] = hashValue.split(`?`);
+      this.changeHash(id, data);
     };
-    window.onhashchange = () => {
-      this.changeController(replaceHashSymbol(location.hash));
-    };
+    window.onhashchange = hashChangeHandler;
+    hashChangeHandler();
   }
 
-  changeController(route = ``) {
-    const Controller = this.routes[route];
-    const controller = new Controller(this.state = initialState);
-    controller.init();
+  static changeHash(id, data) {
+    const Controller = routes[id];
+    let state;
+    if (data !== void 0) {
+      state = decodeState(data);
+    } else {
+      state = initialState;
+    }
+    if (Controller) {
+      const controller = new Controller(state);
+      controller.init();
+    }
   }
 
-  init() {
-    this.changeController(replaceHashSymbol(location.hash));
-  }
-
-  showWelcome() {
+  static showWelcome() {
     location.hash = controllerID.WELCOME;
   }
 
 
-  startGame() {
-    location.hash = controllerID.GAME;
+  static startGame() {
+    location.hash = controllerID.GAME_ARTIST;
   }
 
-  showArtistScreen(state) {
-    this.state = state;
-    const screen = new GameArtistScreen(state);
-    screen.init();
+  static showArtistScreen(state) {
+    location.hash = controllerID.GAME_ARTIST + `?` + encodeState(state);
   }
 
-  showGenreScreen(state) {
-    this.state = state;
-    const screen = new GameGenreScreen(state);
-    screen.init();
+  static showGenreScreen(state) {
+    location.hash = controllerID.GAME_GENRE + `?` + encodeState(state);
   }
 
-  switchLevel(state) {
-    this.state = state;
-    switchLevel(state); //вот тут контекст теряется
+  static switchLevel(state) {
+    switchLevel(state);
   }
 
-  showResult(state) {
-    this.state = state;
-    location.hash = controllerID.RESULT;
+  static showResult(state) {
+    location.hash = controllerID.RESULT + `?` + encodeState(state);
   }
 
 }
-
-export default new Application();
+Application.init();
+export default Application;

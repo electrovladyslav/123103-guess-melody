@@ -1,4 +1,4 @@
 import app from './app';
 
-app.init();
+app.showWelcome();
 // TODO сделать тот же набор вопросов, при повторном старте, как в тз
