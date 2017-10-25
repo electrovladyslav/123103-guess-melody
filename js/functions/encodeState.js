@@ -1,4 +1,5 @@
 import codeMap from '../data/codeMap';
+import checkState from './checkState';
 
 /**
  * Encoding object to string
@@ -6,13 +7,7 @@ import codeMap from '../data/codeMap';
  * @return {string}
  */
 export default (state)=> {
-  if ((state === void 0)
-    || (state.time === void 0)
-    || (state.lives === void 0)
-    || (state.currentLevel === void 0)
-    || (state.answers === void 0)) {
-    throw new Error(`Wrong input data!`);
-  }
+  checkState(state);
   let outStr = ``;
   outStr += `time=${state.time}&`;
   outStr += `lives=${state.lives}&`;
