@@ -6,7 +6,6 @@ import codeMap from '../data/codeMap';
  * @return {string}
  */
 export default (state)=> {
-  const DIVIDER = `&`;
   if ((state === void 0)
     || (state.time === void 0)
     || (state.lives === void 0)
@@ -15,9 +14,10 @@ export default (state)=> {
     throw new Error(`Wrong input data!`);
   }
   let outStr = ``;
-  outStr += state.time + DIVIDER;
-  outStr += state.lives + DIVIDER;
-  outStr += state.currentLevel + DIVIDER;
+  outStr += `time=${state.time}&`;
+  outStr += `lives=${state.lives}&`;
+  outStr += `currentLevel=${state.currentLevel}&`;
+  outStr += `answers=`;
 
   state.answers.forEach((answer) => {
     if (codeMap[answer] !== void 0) {

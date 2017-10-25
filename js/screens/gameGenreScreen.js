@@ -4,6 +4,7 @@ import isSetsEqual from '../functions/isSetsEqual';
 import renderScreen from '../functions/renderScreen';
 import GameScreen from './gameScreen';
 import app from '../app';
+import {FAST_TIME} from '../data/constants';
 
 class GameGenreScreen extends GameScreen {
   constructor(state) {
@@ -20,7 +21,7 @@ class GameGenreScreen extends GameScreen {
 
       let newState = Object.assign({}, this._state);
       if (isSetsEqual(this._view._auxTriggersStore, this._view._level.rightAnswer)) {
-        if (answerTime < 30) {
+        if (answerTime < FAST_TIME) {
           newState.answers.push(`fast`);
         } else {
           newState.answers.push(`correct`);

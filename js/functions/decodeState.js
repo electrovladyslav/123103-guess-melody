@@ -3,11 +3,22 @@ export default (codeStr) => {
   const decodeMap = [`wrong`, `correct`, `fast`];
   const state = {};
   const params = codeStr.split(DIVIDER);
-  state.time = Number(params.shift());
-  state.lives = Number(params.shift());
-  state.currentLevel = Number(params.shift());
+
+  params.forEach((param) => {
+    const val = param.split(`=`);
+    state[val[0]] = Number(val[1]);
+  });
+
+  const indexOfAnswer = codeStr.indexOf(`answers`);
+  const indexOfNextAmp = codeStr.indexOf(`&`, indexOfAnswer);
+  let strAnswers;
+  if (indexOfNextAmp !== -1) {
+    strAnswers = codeStr.slice((indexOfAnswer + 8), indexOfNextAmp);
+  } else {
+    strAnswers = codeStr.slice((indexOfAnswer + 8));
+  }
+  const codeAnswers = strAnswers.split(``);
   state.answers = [];
-  const codeAnswers = params[0].split(``);
   codeAnswers.forEach((answer) => {
     if (decodeMap[answer] !== void 0) {
       state.answers.push(decodeMap[answer]);
