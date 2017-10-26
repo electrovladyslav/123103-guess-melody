@@ -1,4 +1,5 @@
 import getRandomArrElem from '../functions/getRandomArrElem';
+import {LEVELS_AMOUNT} from '../data/constants';
 import app from '../app';
 
 export default (state) => {
@@ -6,13 +7,7 @@ export default (state) => {
     currentLevel: state.currentLevel + 1
   });
 
-  if (state.lives === 0) {
-    newState.result = `loose-attempt`;
-    app.showResult(newState);
-    return;
-  }
-  if (state.time <= 0) {
-    newState.result = `loose-time`;
+  if ((state.lives === 0) || (state.time <= 0)) {
     app.showResult(newState);
     return;
   }
@@ -22,10 +17,9 @@ export default (state) => {
     app.showGenreScreen
   ];
 
-  if (newState.currentLevel < newState.levelsAmount) {
+  if (newState.currentLevel <= LEVELS_AMOUNT) {
     getRandomArrElem(nextLevels)(newState);
-  } else if (newState.currentLevel === newState.levelsAmount) {
-    newState.result = `win`;
+  } else if (newState.currentLevel > LEVELS_AMOUNT) {
     app.showResult(newState);
   }
 };

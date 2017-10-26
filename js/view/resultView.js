@@ -10,24 +10,29 @@ export default class ResultView extends AbstractView {
   }
 
   get title() {
-    switch (this._state.result) {
-      case `win`:
-        return `Вы настоящий меломан!`;
-      case `loose-time`:
-        return `Увы и ах!`;
-      case `loose-attempt`:
-        return `Какая жалость!`;
-      default:
-        throw new TypeError(`Wrong result type!`);
+    if (this._state.lives === 0) {
+      return `Увы и ах!`;
     }
+    if (this._state.time <= 0) {
+      return `Какая жалость!`;
+    }
+    return `Вы настоящий меломан!`;
   }
 
   get template() {
     const points = calcPoints(this._state.answers, this._state.lives);
+    let fastAnswers = 0;
+    this._state.answers.forEach((answer) => {
+      if (answer === `fast`) {
+        fastAnswers++;
+      }
+    });
     const newState = Object.assign({}, this._state, {
       points
     });
     const resultPhrase = outputResult(OTHER_RESULTS_MOCK, newState);
+    const timeMins = Math.floor(this._state.time / 60);
+    let timeSecs = this._state.time % 60;
 
     let outputString = `
       <section class="main main--result">
@@ -36,10 +41,10 @@ export default class ResultView extends AbstractView {
       <h2 class="title">${this.title}</h2>
       <div class="main-stat">
     `;
-    if (this._state.result === `win`) {
+    if (points !== -1) {
       outputString += `
-      За&nbsp;3&nbsp;минуты и 25&nbsp;секунд
-        <br>вы&nbsp;набрали ${points} баллов (0 быстрых)
+      За&nbsp;${timeMins}&nbsp;минуты и ${timeSecs}&nbsp;секунд
+        <br>вы&nbsp;набрали ${points} баллов (${fastAnswers} быстрых)
         <br>совершив ${3 - this._state.lives} ошибки</div>
       <span class="main-comparison">${resultPhrase}</span>
       `;

@@ -1,32 +1,61 @@
 import initialState from './data/initialState';
+import controllerID from './data/controllerID';
 import switchLevel from './functions/switchLevel';
+import encodeState from './functions/encodeState';
+import decodeState from './functions/decodeState';
 
 import WelcomeScreen from './screens/welcomeScreen';
 import GameArtistScreen from './screens/gameArtistScreen';
 import GameGenreScreen from './screens/gameGenreScreen';
 import ResultScreen from './screens/resultScreen';
 
-export default class Application {
+const routes = {
+  [controllerID.WELCOME]: WelcomeScreen,
+  [controllerID.GAME_ARTIST]: GameArtistScreen,
+  [controllerID.GAME_GENRE]: GameGenreScreen,
+  [controllerID.RESULT]: ResultScreen
+};
+
+class Application {
+  static init() {
+    const hashChangeHandler = () => {
+      const hashValue = location.hash.replace(`#`, ``);
+      const [id, data] = hashValue.split(`?`);
+      this.changeHash(id, data);
+    };
+    window.onhashchange = hashChangeHandler;
+    hashChangeHandler();
+  }
+
+  static changeHash(id, data) {
+    const Controller = routes[id];
+    let state;
+    if (data !== void 0) {
+      state = decodeState(data);
+    } else {
+      state = initialState;
+    }
+    if (Controller) {
+      const controller = new Controller(state);
+      controller.init();
+    }
+  }
 
   static showWelcome() {
-    const welcomeScreen = new WelcomeScreen();
-    welcomeScreen.init();
+    location.hash = controllerID.WELCOME;
   }
-  // TODO сделать тот же набор вопросов,
-  // TODO при повторном старте, как в тз
+
+
   static startGame() {
-    const firstScreen = new GameArtistScreen(initialState);
-    firstScreen.init();
+    location.hash = controllerID.GAME_ARTIST;
   }
 
   static showArtistScreen(state) {
-    const screen = new GameArtistScreen(state);
-    screen.init();
+    location.hash = controllerID.GAME_ARTIST + `?` + encodeState(state);
   }
 
   static showGenreScreen(state) {
-    const screen = new GameGenreScreen(state);
-    screen.init();
+    location.hash = controllerID.GAME_GENRE + `?` + encodeState(state);
   }
 
   static switchLevel(state) {
@@ -34,8 +63,9 @@ export default class Application {
   }
 
   static showResult(state) {
-    const screen = new ResultScreen(state);
-    screen.init();
+    location.hash = controllerID.RESULT + `?` + encodeState(state);
   }
 
 }
+Application.init();
+export default Application;

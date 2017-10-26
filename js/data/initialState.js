@@ -1,7 +1,9 @@
+import {TIME_AMOUNT, LEVELS_AMOUNT, LIVES_AMOUNT} from './constants';
+
 export default Object.freeze({
-  time: 5 * 60,
-  lives: 3,
-  levelsAmount: 10,
+  time: TIME_AMOUNT,
+  lives: LIVES_AMOUNT,
+  levelsAmount: LEVELS_AMOUNT,
   currentLevel: 1,
   answers: []
 });

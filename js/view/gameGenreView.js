@@ -1,5 +1,6 @@
 import GameView from './GameView';
 import levelVariant from '../data/levelVariants';
+import {LIVES_AMOUNT} from '../data/constants';
 
 export default class GameGenreView extends GameView {
   constructor(state) {
@@ -14,7 +15,10 @@ export default class GameGenreView extends GameView {
       timeSecs = `0` + timeSecs;
     }
 
-    const livesString = new Array(this._state.lives).fill(`<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`).join(``);
+    let livesString = ``;
+    if (LIVES_AMOUNT > this._state.lives) {
+      livesString += new Array(LIVES_AMOUNT - this._state.lives).fill(`<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`).join(``);
+    }
 
     let stringTemplate = `
     <section class="main main--level main--level-artist">
@@ -22,7 +26,7 @@ export default class GameGenreView extends GameView {
         <circle
           cx="390" cy="390" r="370"
           class="timer-line"
-          style="filter: url(3-game-genre#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"></circle>
+          style="filter: url(.#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"></circle>
   
         <div class="timer-value" xmlns="http://www.w3.org/1999/xhtml">
           <span class="timer-value-mins">${timeMins}</span><!--
