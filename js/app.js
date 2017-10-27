@@ -1,6 +1,5 @@
 import initialState from './data/initialState';
 import controllerID from './data/controllerID';
-import switchLevel from './functions/switchLevel';
 import encodeState from './functions/encodeState';
 import decodeState from './functions/decodeState';
 
@@ -8,6 +7,7 @@ import WelcomeScreen from './screens/welcomeScreen';
 import GameArtistScreen from './screens/gameArtistScreen';
 import GameGenreScreen from './screens/gameGenreScreen';
 import ResultScreen from './screens/resultScreen';
+
 
 const routes = {
   [controllerID.WELCOME]: WelcomeScreen,
@@ -56,10 +56,6 @@ class Application {
 
   static showGenreScreen(state) {
     location.hash = controllerID.GAME_GENRE + `?` + encodeState(state);
-  }
-
-  static switchLevel(state) {
-    switchLevel(state);
   }
 
   static showResult(state) {

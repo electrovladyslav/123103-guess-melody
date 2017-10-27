@@ -2,7 +2,6 @@ import GameArtistView from '../view/gameArtistView';
 import decreaseLife from '../functions/decreaseLife';
 import renderScreen from '../functions/renderScreen';
 import GameScreen from './gameScreen';
-import app from '../app';
 import {FAST_TIME} from '../data/constants';
 
 class GameArtistScreen extends GameScreen {
@@ -30,7 +29,7 @@ class GameArtistScreen extends GameScreen {
         newState = decreaseLife(newState);
       }
 
-      app.switchLevel(newState);
+      this.switchLevel(newState);
     };
 
     renderScreen(this._view.element);

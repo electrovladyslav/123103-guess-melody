@@ -3,7 +3,6 @@ import decreaseLife from '../functions/decreaseLife';
 import isSetsEqual from '../functions/isSetsEqual';
 import renderScreen from '../functions/renderScreen';
 import GameScreen from './gameScreen';
-import app from '../app';
 import {FAST_TIME} from '../data/constants';
 
 class GameGenreScreen extends GameScreen {
@@ -30,7 +29,7 @@ class GameGenreScreen extends GameScreen {
         newState.answers.push(`wrong`);
         newState = decreaseLife(newState);
       }
-      app.switchLevel(newState);
+      this.switchLevel(newState);
     };
 
     renderScreen(this._view.element);
