@@ -39,6 +39,7 @@ export default class GameArtistView extends GameView {
   
       <div class="main-wrap">
         <h2 class="title main-title">${this._level.question}</h2>
+        
         <div class="player-wrapper">
           <div class="player">
             <audio src="${this._level.src}"></audio>

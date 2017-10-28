@@ -41,6 +41,11 @@ class GameScreen {
 
   onAnswer(event) {
     clearInterval(this._timerId);
+
+    if (this._view.playingNow) {
+      this._view.playingNow.pause();
+    }
+
     const answerTime = (Date.now() - this._timeStamp) / 1000;
 
     let newState = Object.assign({}, this._state);
