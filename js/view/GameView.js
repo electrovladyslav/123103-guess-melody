@@ -4,6 +4,7 @@ export default class GameView extends AbstractView {
   constructor(state) {
     super();
     this._state = state;
+    this._level = state.levelsSet[state.currentLevel];
   }
 
   bind() {

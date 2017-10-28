@@ -1,5 +1,4 @@
 import updateTimeInState from '../functions/updateTimeInState';
-import isSetsEqual from '../functions/isSetsEqual';
 import decreaseLife from '../functions/decreaseLife';
 import renderScreen from '../functions/renderScreen';
 import {FAST_TIME, LEVELS_AMOUNT} from '../data/constants';
@@ -65,7 +64,8 @@ class GameScreen {
       isRight = (event.currentTarget.dataset.artist === this._view._level.rightAnswer);
     }
     if (this._level.type === `genre`) {
-      isRight = isSetsEqual(this._view._auxTriggersStore, this._view._level.rightAnswer);
+      isRight = ((this._view._auxTriggersStore.size === 1)
+      && (this._view._auxTriggersStore[0] === this._view._level.rightAnswer));
     }
     return isRight;
   }
