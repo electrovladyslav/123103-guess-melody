@@ -72,13 +72,21 @@ export default class ResultView extends AbstractView {
 
   }
 
+  /**
+   * Get array of points from object of other results
+   * @return {Array}
+   */
   get otherResultsPoints() {
     const arrOfOtherResults = [];
-    this.otherResults.forEach((result) => {
-      if (result.points !== void 0) {
-        arrOfOtherResults.push(result.points);
-      }
-    });
+    if ((this.otherResults !== void 0)
+        && (this.otherResults.length > 0)) {
+
+      this.otherResults.forEach((result) => {
+        if (result.points !== void 0) {
+          arrOfOtherResults.push(result.points);
+        }
+      });
+    }
     return arrOfOtherResults;
   }
 }

@@ -1,9 +1,11 @@
 import renderScreen from '../functions/renderScreen';
 import calcPoints from '../functions/calcPoints';
+import {loadResults, saveResults} from '../functions/serverCommunicationFunctions';
+
+import {OTHER_RESULTS_MOCK} from '../data/constants';
 
 import ResultView from '../view/resultView';
 import app from '../app';
-import {loadResults, saveResults} from '../functions/loadFunctions';
 
 export default class {
   constructor(state) {
@@ -16,22 +18,31 @@ export default class {
       app.startGame();
     };
 
-    if ((this._state.lives > 0) || (this._state.time > 0)) {
+    if ((this._state.lives > 0) && (this._state.time > 0)) {
+
       this._view.points = calcPoints(this._state.answers, this._state.lives);
+
       loadResults({})
           .then((results) => {
             this._view.otherResults = results;
+          }, (err) => {
+            window.console.log(err);
+            this._view.otherResults = OTHER_RESULTS_MOCK;
           })
+
           .then(() => {
-            saveResults({
+            renderScreen(this._view.element);
+
+            return saveResults({
               data: {
                 time: this._state.time,
                 points: this._view.points
               }
-            }).then(() => {
-              renderScreen(this._view.element);
             });
+          }, (err) => {
+            window.console.log(err);
           });
+
     } else {
       renderScreen(this._view.element);
     }
