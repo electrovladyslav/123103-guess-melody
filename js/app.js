@@ -2,7 +2,6 @@ import initialState from './data/initialState';
 import controllerID from './data/controllerID';
 import encodeState from './functions/encodeState';
 import decodeState from './functions/decodeState';
-import Loader from './loader';
 
 import WelcomeScreen from './screens/welcomeScreen';
 import GameScreen from './screens/gameScreen';
@@ -61,6 +60,4 @@ class Application {
   }
 }
 
-Loader.loadData().
-    then((levelsSet) => Application.init(levelsSet));
 export default Application;

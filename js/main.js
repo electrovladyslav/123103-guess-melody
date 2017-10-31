@@ -1,4 +1,5 @@
-import app from './app';
+import App from './app';
+import {loadData} from './functions/loadFunctions';
 
-app.showWelcome();
-// TODO сделать тот же набор вопросов, при повторном старте, как в тз
+loadData().then((levelsSet) => App.init(levelsSet));
+App.showWelcome();

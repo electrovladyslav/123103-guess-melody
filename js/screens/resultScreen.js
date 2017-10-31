@@ -3,7 +3,7 @@ import calcPoints from '../functions/calcPoints';
 
 import ResultView from '../view/resultView';
 import app from '../app';
-import Loader from '../loader';
+import {loadResults, saveResults} from '../functions/loadFunctions';
 
 export default class {
   constructor(state) {
@@ -18,14 +18,16 @@ export default class {
 
     if ((this._state.lives > 0) || (this._state.time > 0)) {
       this._view.points = calcPoints(this._state.answers, this._state.lives);
-      Loader.loadResults()
+      loadResults({})
           .then((results) => {
             this._view.otherResults = results;
           })
           .then(() => {
-            Loader.saveResults({
-              time: this._state.time,
-              points: this._view.points
+            saveResults({
+              data: {
+                time: this._state.time,
+                points: this._view.points
+              }
             }).then(() => {
               renderScreen(this._view.element);
             });
