@@ -18,9 +18,9 @@ export default class WelcomeView extends AbstractView {
   }
 
   bind() {
-    const trigger = this._element.querySelector(`.main-play`);
-    if (trigger) {
-      trigger.addEventListener(`click`, this.switchToNextScreen);
+    this._startBtn = this._element.querySelector(`.main-play`);
+    if (this._startBtn) {
+      this._startBtn.addEventListener(`click`, this.switchToNextScreen);
     } else {
       throw new Error(`There is no possible to switch level (no-triggers).`);
     }
@@ -28,5 +28,13 @@ export default class WelcomeView extends AbstractView {
 
   switchToNextScreen() {
 
+  }
+
+  lockStart() {
+    this._startBtn.disabled = true;
+  }
+
+  unlockStart() {
+    this._startBtn.disabled = false;
   }
 }
