@@ -5,7 +5,6 @@
  * @param {function} onElapse callback for time elapsing
  * @return {number} timerId for clear timer outside
  */
-// TODO сделать быстрые ответы
 const timer = (time, onTick, onElapse) => {
   const timerId = setInterval(() => {
     onTick(--time);

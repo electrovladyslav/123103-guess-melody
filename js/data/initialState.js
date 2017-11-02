@@ -4,6 +4,6 @@ export default Object.freeze({
   time: TIME_AMOUNT,
   lives: LIVES_AMOUNT,
   levelsAmount: LEVELS_AMOUNT,
-  currentLevel: 1,
+  currentLevel: 0,
   answers: []
 });

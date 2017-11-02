@@ -4,6 +4,7 @@ export default class GameView extends AbstractView {
   constructor(state) {
     super();
     this._state = state;
+    this._level = state.levelsSet[state.currentLevel];
   }
 
   bind() {
@@ -25,13 +26,18 @@ export default class GameView extends AbstractView {
 
   playPause(element) {
     if (element.classList.contains(`player-control--pause`)) {
+
       if (this.playingNow) {
         this.playingNow.pause();
+        this.playingNow.nextElementSibling.classList.remove(`player-control--play`);
+        this.playingNow.nextElementSibling.classList.add(`player-control--pause`);
       }
+
       element.previousElementSibling.play();
       this.playingNow = element.previousElementSibling;
       element.classList.remove(`player-control--pause`);
       element.classList.add(`player-control--play`);
+
     } else {
       element.previousElementSibling.pause();
       this.playingNow = null;

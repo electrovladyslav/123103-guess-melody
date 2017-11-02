@@ -1,7 +1,5 @@
 import AbstractView from './AbstractView';
-import calcPoints from '../functions/calcPoints';
 import outputResult from '../functions/outputResult';
-import OTHER_RESULTS_MOCK from '../data/otherResultsMock';
 
 export default class ResultView extends AbstractView {
   constructor(state) {
@@ -16,21 +14,22 @@ export default class ResultView extends AbstractView {
     if (this._state.time <= 0) {
       return `Какая жалость!`;
     }
+    this.win = true;
     return `Вы настоящий меломан!`;
   }
 
   get template() {
-    const points = calcPoints(this._state.answers, this._state.lives);
     let fastAnswers = 0;
     this._state.answers.forEach((answer) => {
       if (answer === `fast`) {
         fastAnswers++;
       }
     });
-    const newState = Object.assign({}, this._state, {
-      points
+    this._state = Object.assign({}, this._state, {
+      points: this.points
     });
-    const resultPhrase = outputResult(OTHER_RESULTS_MOCK, newState);
+    const resultPhrase = outputResult(this.otherResultsPoints, this._state);
+
     const timeMins = Math.floor(this._state.time / 60);
     let timeSecs = this._state.time % 60;
 
@@ -41,10 +40,10 @@ export default class ResultView extends AbstractView {
       <h2 class="title">${this.title}</h2>
       <div class="main-stat">
     `;
-    if (points !== -1) {
+    if (this.win) {
       outputString += `
       За&nbsp;${timeMins}&nbsp;минуты и ${timeSecs}&nbsp;секунд
-        <br>вы&nbsp;набрали ${points} баллов (${fastAnswers} быстрых)
+        <br>вы&nbsp;набрали ${this.points} баллов (${fastAnswers} быстрых)
         <br>совершив ${3 - this._state.lives} ошибки</div>
       <span class="main-comparison">${resultPhrase}</span>
       `;
@@ -71,5 +70,23 @@ export default class ResultView extends AbstractView {
 
   switchToNextScreen() {
 
+  }
+
+  /**
+   * Get array of points from object of other results
+   * @return {Array}
+   */
+  get otherResultsPoints() {
+    const arrOfOtherResults = [];
+    if ((this.otherResults !== void 0)
+        && (this.otherResults.length > 0)) {
+
+      this.otherResults.forEach((result) => {
+        if (result.points !== void 0) {
+          arrOfOtherResults.push(result.points);
+        }
+      });
+    }
+    return arrOfOtherResults;
   }
 }

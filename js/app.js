@@ -1,23 +1,22 @@
 import initialState from './data/initialState';
 import controllerID from './data/controllerID';
-import switchLevel from './functions/switchLevel';
 import encodeState from './functions/encodeState';
 import decodeState from './functions/decodeState';
 
 import WelcomeScreen from './screens/welcomeScreen';
-import GameArtistScreen from './screens/gameArtistScreen';
-import GameGenreScreen from './screens/gameGenreScreen';
+import GameScreen from './screens/gameScreen';
 import ResultScreen from './screens/resultScreen';
 
-const routes = {
-  [controllerID.WELCOME]: WelcomeScreen,
-  [controllerID.GAME_ARTIST]: GameArtistScreen,
-  [controllerID.GAME_GENRE]: GameGenreScreen,
-  [controllerID.RESULT]: ResultScreen
-};
 
 class Application {
-  static init() {
+  static init(levelsSet) {
+    this.levelsSet = levelsSet;
+    this.routes = {
+      [controllerID.WELCOME]: WelcomeScreen,
+      [controllerID.GAME]: GameScreen,
+      [controllerID.RESULT]: ResultScreen
+    };
+
     const hashChangeHandler = () => {
       const hashValue = location.hash.replace(`#`, ``);
       const [id, data] = hashValue.split(`?`);
@@ -28,13 +27,16 @@ class Application {
   }
 
   static changeHash(id, data) {
-    const Controller = routes[id];
+    const Controller = this.routes[id];
     let state;
     if (data !== void 0) {
       state = decodeState(data);
     } else {
       state = initialState;
     }
+    state = Object.assign({}, state, {
+      levelsSet: this.levelsSet
+    });
     if (Controller) {
       const controller = new Controller(state);
       controller.init();
@@ -45,27 +47,17 @@ class Application {
     location.hash = controllerID.WELCOME;
   }
 
-
   static startGame() {
-    location.hash = controllerID.GAME_ARTIST;
+    location.hash = controllerID.GAME;
   }
 
-  static showArtistScreen(state) {
-    location.hash = controllerID.GAME_ARTIST + `?` + encodeState(state);
-  }
-
-  static showGenreScreen(state) {
-    location.hash = controllerID.GAME_GENRE + `?` + encodeState(state);
-  }
-
-  static switchLevel(state) {
-    switchLevel(state);
+  static showNextScreen(state) {
+    location.hash = controllerID.GAME + `?` + encodeState(state);
   }
 
   static showResult(state) {
     location.hash = controllerID.RESULT + `?` + encodeState(state);
   }
-
 }
-Application.init();
+
 export default Application;

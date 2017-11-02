@@ -1,11 +1,9 @@
 import GameView from './GameView';
-import levelVariant from '../data/levelVariants';
 import {LIVES_AMOUNT} from '../data/constants';
 
 export default class GameGenreView extends GameView {
   constructor(state) {
     super(state);
-    this._level = levelVariant.genre;
   }
 
   get template() {
@@ -40,7 +38,7 @@ export default class GameGenreView extends GameView {
       </div>
   
       <div class="main-wrap">
-        <h2 class="title">${this._level.title}</h2>
+        <h2 class="title">${this._level.question}</h2>
         <form class="genre">`;
 
     const answersList = this._level.answers.map((answer, number) => {
@@ -55,8 +53,8 @@ export default class GameGenreView extends GameView {
             </div>
           </div>
         </div>
-        <input type="checkbox" name="answer" value="answer-${number}" id="a-${number}" data-artist="${answer.artist}">
-        <label class="genre-answer-check" for="a-${number}" data-artist="${answer.artist}"></label>
+        <input type="checkbox" name="answer" value="answer-${number}" id="a-${number}" data-genre="${answer.genre}">
+        <label class="genre-answer-check" for="a-${number}" data-genre="${answer.genre}"></label>
       </div>
     `;
     }).join(``);
@@ -74,15 +72,16 @@ export default class GameGenreView extends GameView {
 
   bind() {
     super.bind();
+    this.storeRightAnswer();
     const mainTrigger = this._element.querySelector(`.genre-answer-send`);
     const auxTriggers = this._element.querySelectorAll(`input[name="answer"]`);
     this._auxTriggersStore = new Set();
 
     const onChoose = (event) => {
-      if (this._auxTriggersStore.has(event.target.dataset.artist)) {
-        this._auxTriggersStore.delete(event.target.dataset.artist);
+      if (this._auxTriggersStore.has(event.target.dataset.genre)) {
+        this._auxTriggersStore.delete(event.target.dataset.genre);
       } else {
-        this._auxTriggersStore.add(event.target.dataset.artist);
+        this._auxTriggersStore.add(event.target.dataset.genre);
       }
       mainTrigger.disabled = !this._auxTriggersStore.size;
     };
@@ -103,6 +102,9 @@ export default class GameGenreView extends GameView {
     });
   }
 
+  storeRightAnswer() {
+    this._level.rightAnswer = this._level.genre;
+  }
 
   onAnswer() {
   }

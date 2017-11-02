@@ -1,12 +1,9 @@
 import GameView from './GameView';
-import levelVariant from '../data/levelVariants';
 import {LIVES_AMOUNT} from '../data/constants';
 
 export default class GameArtistView extends GameView {
   constructor(state) {
-    super();
-    this._state = state;
-    this._level = levelVariant.artist;
+    super(state);
   }
 
   get template() {
@@ -41,10 +38,11 @@ export default class GameArtistView extends GameView {
       </div>
   
       <div class="main-wrap">
-        <h2 class="title main-title">${this._level.title}</h2>
+        <h2 class="title main-title">${this._level.question}</h2>
+        
         <div class="player-wrapper">
           <div class="player">
-            <audio src="${this._level.audio.src}"></audio>
+            <audio src="${this._level.src}"></audio>
             <button class="player-control player-control--pause"></button>
             <div class="player-track">
               <span class="player-status"></span>
@@ -57,14 +55,23 @@ export default class GameArtistView extends GameView {
     const answersList = this._level.answers.map((answer, number) => {
       return `
       <div class="main-answer-wrapper">
-      <input class="main-answer-r" type="radio" id="answer-${number}" name="answer" value="val-${number}"/>
-      <label class="main-answer" for="answer-${number}"  data-artist="${answer}">
-        <img class="main-answer-preview" src="http://placehold.it/134x134"
-             alt="${answer}" width="134" height="134">
-        ${answer}
-      </label>
-    </div>
-    `;
+        <input class="main-answer-r"
+         type="radio"
+         id="answer-${number}"
+         name="answer"
+         value="val-${number}"/>
+        
+        <label class="main-answer"
+         for="answer-${number}"
+         data-artist="${answer.title}">
+          <img class="main-answer-preview"
+           src="${answer.image.url}"
+           alt="${answer.title}"
+           width="${answer.image.width}"
+           height="${answer.image.height}">
+          ${answer.title}
+        </label>
+      </div>`;
     }).join(``);
 
     stringTemplate += answersList;
@@ -79,6 +86,7 @@ export default class GameArtistView extends GameView {
 
   bind() {
     super.bind();
+    this.storeRightAnswer();
     const triggers = this._element.querySelectorAll(`.main-answer`);
     if (triggers.length) {
       [...triggers].forEach((trigger) => {
@@ -89,6 +97,15 @@ export default class GameArtistView extends GameView {
       });
     } else {
       throw new Error(`There is no possible to switch level (no-triggers).`);
+    }
+  }
+
+  storeRightAnswer() {
+    for (const answer of this._level.answers) {
+      if (answer.isCorrect) {
+        this._level.rightAnswer = answer.title;
+        break;
+      }
     }
   }
 

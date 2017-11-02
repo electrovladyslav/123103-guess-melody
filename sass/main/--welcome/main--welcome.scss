@@ -29,6 +29,22 @@
   width: 0;
 }
 
+.main-play:disabled,
+.main-play:disabled:hover,
+.main-play:disabled:hover {
+  transform: none;
+  border-left-color: $color-text-grey;
+  cursor: auto;
+}
+
+.main-play:disabled:before {
+  content: 'Ожидайте, идёт загрузка';
+  position: absolute;
+  font: italic 300 20px $font;
+  top: -150px;
+  left: -150px;
+}
+
 .main-play:hover {
   transform: scale(1.05);
 }
