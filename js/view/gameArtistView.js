@@ -1,4 +1,4 @@
-import GameView from './GameView';
+import GameView from './gameView';
 import {LIVES_AMOUNT} from '../data/constants';
 
 export default class GameArtistView extends GameView {
@@ -89,7 +89,7 @@ export default class GameArtistView extends GameView {
     this.storeRightAnswer();
     const triggers = this._element.querySelectorAll(`.main-answer`);
     if (triggers.length) {
-      [...triggers].forEach((trigger) => {
+      Array.from(triggers).forEach((trigger) => {
         trigger.addEventListener(`click`, (event) => {
           event.preventDefault();
           this.onAnswer(event);

@@ -13,7 +13,7 @@ export function loadData(path = SERVER_URL) {
 /**
  * Load statistic data from server in json and convert it to js array/object
  * @param {string} path to data on server
- * @param {string} name of user-owner of statistics 
+ * @param {string} name of user-owner of statistics
  * @return {Promise.<*>} promise with resolved json
  */
 export function loadResults({path = SERVER_URL, name = DEFAULT_NAME}) {
@@ -38,4 +38,8 @@ export function saveResults({path = SERVER_URL, data, name = DEFAULT_NAME}) {
     method: `POST`
   };
   return fetch(`${path}/stats/${name}`, requestSettings);
+}
+
+export function preloadResourses(resource) {
+  fetch(resource);
 }

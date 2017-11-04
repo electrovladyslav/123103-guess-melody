@@ -1,4 +1,4 @@
-import GameView from './GameView';
+import GameView from './gameView';
 import {LIVES_AMOUNT} from '../data/constants';
 
 export default class GameGenreView extends GameView {
@@ -87,7 +87,7 @@ export default class GameGenreView extends GameView {
     };
 
     if (auxTriggers.length) {
-      [...auxTriggers].forEach((trigger) => {
+      Array.from(auxTriggers).forEach((trigger) => {
         trigger.addEventListener(`change`, (event) => {
           onChoose(event);
         });
