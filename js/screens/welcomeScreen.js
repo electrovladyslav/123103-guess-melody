@@ -1,5 +1,6 @@
 import renderScreen from '../functions/renderScreen';
 import findAllAudioSrc from '../functions/findAllAudioSrc';
+import {preloadResourses} from '../functions/serverCommunicationFunctions';
 import app from '../app';
 import WelcomeView from '../view/welcomeView';
 
@@ -15,22 +16,11 @@ class WelcomeScreen {
     };
 
     renderScreen(this._view.element);
+    let sources = findAllAudioSrc(this._levelsSet);
 
     this._view.lockStart();
-    const sources = findAllAudioSrc(this._levelsSet);
 
-    const loadResouce = (resource) => {
-      const promise = new Promise((resolve) => {
-        const audio = document.createElement(`audio`);
-        audio.src = resource;
-
-        audio.addEventListener(`canplay`, resolve);
-      });
-
-      return promise;
-    };
-
-    Promise.all(sources.map(loadResouce))
+    Promise.all(sources.map(preloadResourses))
         .then(() => {
           this._view.unlockStart();
         }, (err) => {

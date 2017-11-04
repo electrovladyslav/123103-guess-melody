@@ -1,4 +1,4 @@
-import AbstractView from './AbstractView';
+import AbstractView from './abstractView';
 import outputResult from '../functions/outputResult';
 
 export default class ResultView extends AbstractView {

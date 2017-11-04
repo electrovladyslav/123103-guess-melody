@@ -19,6 +19,6 @@ export default (levelsSet) => {
         throw new TypeError(`Wrong type of level!`);
     }
   });
-  return [...srcList];
+  return Array.from(srcList);
 };
 

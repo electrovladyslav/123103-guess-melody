@@ -1,4 +1,4 @@
-import AbstractView from './AbstractView';
+import AbstractView from './abstractView';
 import initialState from '../data/initialState';
 
 export default class WelcomeView extends AbstractView {

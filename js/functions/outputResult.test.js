@@ -15,8 +15,8 @@ describe(`On functions input `, () => {
 
   it(`second parameter (currentResult) should be an object `, () => {
     assert.throws(() => {
-      // outputResult([1], `2`);
-      // outputResult([1], 2);
+      outputResult([1], `2`);
+      outputResult([1], 2);
       outputResult([1], null);
     });
 

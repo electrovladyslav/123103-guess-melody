@@ -1,4 +1,4 @@
-import AbstractView from './AbstractView';
+import AbstractView from './abstractView';
 
 export default class GameView extends AbstractView {
   constructor(state) {
@@ -16,7 +16,7 @@ export default class GameView extends AbstractView {
   addPlayLogic() {
     const playButtons = this._element.querySelectorAll(`.player-control`);
     this.playingNow = null;
-    [...playButtons].forEach((button) => {
+    Array.from(playButtons).forEach((button) => {
       button.addEventListener(`click`, (event) => {
         event.preventDefault();
         this.playPause(event.target);
