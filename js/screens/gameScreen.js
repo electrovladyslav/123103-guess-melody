@@ -49,12 +49,11 @@ class GameScreen {
     const answerTime = (Date.now() - this._timeStamp) / 1000;
 
     let newState = Object.assign({}, this._state);
+    /* eslint no-unused-expressions: ["error", { "allowTernary": true }]*/
     if (this.checkAnswer(event)) {
-      if (answerTime < FAST_TIME) {
-        newState.answers.push(`fast`);
-      } else {
-        newState.answers.push(`correct`);
-      }
+      answerTime < FAST_TIME ?
+        newState.answers.push(`fast`)
+        : newState.answers.push(`correct`);
     } else {
       newState.answers.push(`wrong`);
       newState = decreaseLife(newState);
