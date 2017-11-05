@@ -1,5 +1,6 @@
 import AbstractView from './abstractView';
 import outputResult from '../functions/outputResult';
+import {LIVES_AMOUNT} from '../data/constants';
 
 export default class ResultView extends AbstractView {
   constructor(state) {
@@ -44,7 +45,7 @@ export default class ResultView extends AbstractView {
       outputString += `
       За&nbsp;${timeMins}&nbsp;минуты и ${timeSecs}&nbsp;секунд
         <br>вы&nbsp;набрали ${this.points} баллов (${fastAnswers} быстрых)
-        <br>совершив ${3 - this._state.lives} ошибки</div>
+        <br>совершив ${LIVES_AMOUNT - this._state.lives} ошибки</div>
       <span class="main-comparison">${resultPhrase}</span>
       `;
     } else {

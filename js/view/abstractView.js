@@ -1,5 +1,3 @@
-import makeElementFromTemplate from '../functions/makeElementFromTemplate';
-
 export default class AbstractView {
   get template() {
     throw new Error(`You have to define template for view!`);
@@ -14,7 +12,9 @@ export default class AbstractView {
   }
 
   render() {
-    return makeElementFromTemplate(this.template);
+    const domTemplate = document.createElement(`template`);
+    domTemplate.innerHTML = this.template;
+    return domTemplate.content;
   }
 
   bind() {

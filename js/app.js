@@ -1,7 +1,6 @@
 import initialState from './data/initialState';
 import controllerID from './data/controllerID';
-import encodeState from './functions/encodeState';
-import decodeState from './functions/decodeState';
+import {encodeState, decodeState} from './data/utuls';
 
 import WelcomeScreen from './screens/welcomeScreen';
 import GameScreen from './screens/gameScreen';

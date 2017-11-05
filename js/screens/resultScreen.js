@@ -1,4 +1,4 @@
-import renderScreen from '../functions/renderScreen';
+import {renderScreen} from '../data/utuls';
 import calcPoints from '../functions/calcPoints';
 import {loadResults, saveResults} from '../functions/serverCommunicationFunctions';
 

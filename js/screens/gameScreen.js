@@ -1,9 +1,7 @@
-import updateTimeInState from '../functions/updateTimeInState';
-import decreaseLife from '../functions/decreaseLife';
-import renderScreen from '../functions/renderScreen';
+import {renderScreen} from '../data/utuls';
 import {FAST_TIME, LEVELS_AMOUNT} from '../data/constants';
 
-import timer from '../functions/timer';
+import timer from '../data/timer';
 import app from '../app';
 
 import GameArtistView from '../view/gameArtistView';
@@ -28,7 +26,9 @@ class GameScreen {
     this._timerId = timer(
         this._state.time, (time) => {
           this._view.updateTimeOnScreen(time);
-          this._state = updateTimeInState(this._state, time);
+          this._state = Object.assign({}, this._state, {
+            time
+          });
         }, () => {
           this.switchLevel(this._state);
         }
@@ -40,24 +40,23 @@ class GameScreen {
   }
 
   onAnswer(event) {
+    const answerTime = (Date.now() - this._timeStamp) / 1000;
+    const newState = Object.assign({}, this._state);
+    let answer;
+
     clearInterval(this._timerId);
 
     if (this._view.playingNow) {
       this._view.playingNow.pause();
     }
 
-    const answerTime = (Date.now() - this._timeStamp) / 1000;
-
-    let newState = Object.assign({}, this._state);
-    /* eslint no-unused-expressions: ["error", { "allowTernary": true }]*/
     if (this.checkAnswer(event)) {
-      answerTime < FAST_TIME ?
-        newState.answers.push(`fast`)
-        : newState.answers.push(`correct`);
+      answer = (answerTime < FAST_TIME) ? `fast` : `correct`;
     } else {
-      newState.answers.push(`wrong`);
-      newState = decreaseLife(newState);
+      answer = `wrong`;
+      newState.lives--;
     }
+    newState.answers.push(answer);
 
     this.switchLevel(newState);
   }

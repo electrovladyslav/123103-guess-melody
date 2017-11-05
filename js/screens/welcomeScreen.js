@@ -1,5 +1,4 @@
-import renderScreen from '../functions/renderScreen';
-import findAllAudioSrc from '../functions/findAllAudioSrc';
+import {renderScreen, findAllSrc} from '../data/utuls';
 import {preloadResourses} from '../functions/serverCommunicationFunctions';
 import app from '../app';
 import WelcomeView from '../view/welcomeView';
@@ -16,7 +15,7 @@ class WelcomeScreen {
     };
 
     renderScreen(this._view.element);
-    let sources = findAllAudioSrc(this._levelsSet);
+    let sources = findAllSrc(this._levelsSet);
 
     this._view.lockStart();
 

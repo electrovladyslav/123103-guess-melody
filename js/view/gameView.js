@@ -1,4 +1,5 @@
 import AbstractView from './abstractView';
+import {FAST_TIME} from '../data/constants';
 
 export default class GameView extends AbstractView {
   constructor(state) {
@@ -55,7 +56,7 @@ export default class GameView extends AbstractView {
     this.timeElementMins.textContent = timeMins;
     this.timeElementSecs.textContent = timeSecs;
 
-    if (time === 30) {
+    if (time === FAST_TIME) {
       this.timeElementMins.parentNode.classList.add(`timer-value--finished`);
     }
   }

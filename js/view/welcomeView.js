@@ -1,5 +1,5 @@
 import AbstractView from './abstractView';
-import initialState from '../data/initialState';
+import {LIVES_AMOUNT, TIME_AMOUNT} from '../data/constants';
 
 export default class WelcomeView extends AbstractView {
   get template() {
@@ -9,8 +9,8 @@ export default class WelcomeView extends AbstractView {
     <button class="main-play">Начать игру</button>
     <h2 class="title main-title">Правила игры</h2>
     <p class="text main-text">
-      Правила просты&nbsp;— за&nbsp;${initialState.time / 60} минут ответить на все вопросы.<br>
-    Ошибиться можно ${initialState.lives} раза.<br>
+      Правила просты&nbsp;— за&nbsp;${TIME_AMOUNT / 60} минут ответить на все вопросы.<br>
+    Ошибиться можно ${LIVES_AMOUNT} раза.<br>
     Удачи!
     </p>
     </section>
