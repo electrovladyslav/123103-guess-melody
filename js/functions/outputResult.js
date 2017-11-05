@@ -10,14 +10,6 @@
 export default (otherResults, currentResult) => {
   let outputString = ``;
 
-  if (!Array.isArray(otherResults)) {
-    throw new TypeError(`It should be an Array of other results on input`);
-  }
-
-  if ((typeof (currentResult) !== `object`) && (currentResult !== null)) {
-    throw new TypeError(`It should be an Oject of current result on input`);
-  }
-
   if (currentResult.time <= 0) {
     outputString = `Время вышло!<br>Вы не успели отгадать все мелодии`;
     return outputString;
