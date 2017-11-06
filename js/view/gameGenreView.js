@@ -77,13 +77,24 @@ export default class GameGenreView extends GameView {
     const auxTriggers = this._element.querySelectorAll(`input[name="answer"]`);
     this._auxTriggersStore = new Set();
 
+    const changeMainTrigger = () => {
+      let checkedFlag = false;
+      Array.from(auxTriggers).forEach((trigger) => {
+        if (trigger.checked) {
+          checkedFlag = true;
+        }
+      });
+      mainTrigger.disabled = !checkedFlag;
+    };
+
     const onChoose = (event) => {
-      if (this._auxTriggersStore.has(event.target.dataset.genre)) {
-        this._auxTriggersStore.delete(event.target.dataset.genre);
+      if (this._auxTriggersStore.has(event.target)) {
+        this._auxTriggersStore.delete(event.target);
       } else {
-        this._auxTriggersStore.add(event.target.dataset.genre);
+        this._auxTriggersStore.add(event.target);
       }
-      mainTrigger.disabled = !this._auxTriggersStore.size;
+      this._auxTriggersStore.add(event.target);
+      changeMainTrigger();
     };
 
     if (auxTriggers.length) {
@@ -98,8 +109,12 @@ export default class GameGenreView extends GameView {
 
     mainTrigger.addEventListener(`click`, () => {
       event.preventDefault();
-      this.onAnswer(event);
+      this.onAnswer(this.getDatasets(Array.from(this._auxTriggersStore)));
     });
+  }
+
+  getDatasets(elements) {
+    return elements.map((element) => element.dataset.genre);
   }
 
   storeRightAnswer() {

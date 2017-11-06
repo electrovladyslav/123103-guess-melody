@@ -34,12 +34,12 @@ class GameScreen {
         }
     );
 
-    this._view.onAnswer = (event) => this.onAnswer(event);
+    this._view.onAnswer = (answeredValue) => this.onAnswer(answeredValue);
 
     renderScreen(this._view.element);
   }
 
-  onAnswer(event) {
+  onAnswer(answeredValue) {
     const answerTime = (Date.now() - this._timeStamp) / 1000;
     const newState = Object.assign({}, this._state);
     let answer;
@@ -50,7 +50,7 @@ class GameScreen {
       this._view.playingNow.pause();
     }
 
-    if (this.checkAnswer(event)) {
+    if (this.checkAnswer(answeredValue)) {
       answer = (answerTime < FAST_TIME) ? `fast` : `correct`;
     } else {
       answer = `wrong`;
@@ -61,15 +61,21 @@ class GameScreen {
     this.switchLevel(newState);
   }
 
-  checkAnswer(event) {
-    let isRight;
+  checkAnswer(answeredValue) {
+    let isRight = true;
+
     if (this._level.type === `artist`) {
-      isRight = (event.currentTarget.dataset.artist === this._view._level.rightAnswer);
+      isRight = (answeredValue === this._view._level.rightAnswer);
     }
+
     if (this._level.type === `genre`) {
-      isRight = ((this._view._auxTriggersStore.size === 1)
-      && (this._view._auxTriggersStore[0] === this._view._level.rightAnswer));
+      answeredValue.forEach((value) => {
+        if (value !== this._view._level.rightAnswer) {
+          isRight = false;
+        }
+      });
     }
+
     return isRight;
   }
 

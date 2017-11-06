@@ -92,7 +92,7 @@ export default class GameArtistView extends GameView {
       Array.from(triggers).forEach((trigger) => {
         trigger.addEventListener(`click`, (event) => {
           event.preventDefault();
-          this.onAnswer(event);
+          this.onAnswer(event.currentTarget.dataset.artist);
         });
       });
     } else {
