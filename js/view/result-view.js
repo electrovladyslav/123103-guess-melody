@@ -1,5 +1,5 @@
-import AbstractView from './abstractView';
-import outputResult from '../functions/outputResult';
+import AbstractView from './abstract-view';
+import outputResult from '../functions/output-result';
 import {LIVES_AMOUNT} from '../data/constants';
 
 export default class ResultView extends AbstractView {

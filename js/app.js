@@ -1,10 +1,10 @@
-import initialState from './data/initialState';
-import controllerID from './data/controllerID';
+import initialState from './data/initial-state';
+import controllerID from './data/controller-id';
 import {encodeState, decodeState} from './data/utuls';
 
-import WelcomeScreen from './screens/welcomeScreen';
-import GameScreen from './screens/gameScreen';
-import ResultScreen from './screens/resultScreen';
+import WelcomeScreen from './screens/welcome-screen';
+import GameScreen from './screens/game-screen';
+import ResultScreen from './screens/result-screen';
 
 
 class Application {

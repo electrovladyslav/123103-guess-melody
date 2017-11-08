@@ -1,4 +1,4 @@
-import AbstractView from './abstractView';
+import AbstractView from './abstract-view';
 import {FAST_TIME} from '../data/constants';
 
 export default class GameView extends AbstractView {

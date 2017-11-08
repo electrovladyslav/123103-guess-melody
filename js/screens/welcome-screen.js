@@ -1,7 +1,7 @@
 import {renderScreen, findAllSrc} from '../data/utuls';
-import {preloadResourses} from '../functions/serverCommunicationFunctions';
+import {preloadResourses} from '../functions/server-communication-functions';
 import app from '../app';
-import WelcomeView from '../view/welcomeView';
+import WelcomeView from '../view/welcome-view';
 
 class WelcomeScreen {
   constructor(state) {

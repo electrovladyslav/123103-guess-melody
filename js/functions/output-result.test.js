@@ -1,5 +1,5 @@
-import outputResult from './outputResult';
-import OTHER_RESULTS_MOCK from '../data/otherResultsMock';
+import outputResult from './output-result';
+import OTHER_RESULTS_MOCK from '../data/other-results-mock';
 import assert from 'assert';
 
 describe(`On functions output `, () => {

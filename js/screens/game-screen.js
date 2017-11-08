@@ -4,8 +4,8 @@ import {FAST_TIME, LEVELS_AMOUNT} from '../data/constants';
 import timer from '../data/timer';
 import app from '../app';
 
-import GameArtistView from '../view/gameArtistView';
-import GameGenreView from '../view/gameGenreView';
+import GameArtistView from '../view/game-artist-view';
+import GameGenreView from '../view/game-genre-view';
 
 class GameScreen {
   constructor(state) {

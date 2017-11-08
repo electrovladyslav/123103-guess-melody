@@ -1,10 +1,10 @@
 import {renderScreen} from '../data/utuls';
-import calcPoints from '../functions/calcPoints';
-import {loadResults, saveResults} from '../functions/serverCommunicationFunctions';
+import calcPoints from '../functions/calc-points';
+import {loadResults, saveResults} from '../functions/server-communication-functions';
 
 import {OTHER_RESULTS_MOCK} from '../data/constants';
 
-import ResultView from '../view/resultView';
+import ResultView from '../view/result-view';
 import app from '../app';
 
 export default class {
@@ -25,8 +25,8 @@ export default class {
       loadResults({})
           .then((results) => {
             this._view.otherResults = results;
-          }, (err) => {
-            window.console.log(err);
+          }, () => {
+            window.console.log(`No possible to load statistics of other games. Mock statistic used.`);
             this._view.otherResults = OTHER_RESULTS_MOCK;
           })
 

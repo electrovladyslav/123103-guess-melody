@@ -6,8 +6,7 @@ import {SERVER_URL, DEFAULT_NAME} from '../data/constants';
  */
 export function loadData(path = SERVER_URL) {
   return fetch(`${path}/questions`).then(
-      (res) => res.json(),
-      (err) => window.console.log(err));
+      (res) => res.json());
 }
 
 /**
@@ -18,8 +17,7 @@ export function loadData(path = SERVER_URL) {
  */
 export function loadResults({path = SERVER_URL, name = DEFAULT_NAME}) {
   return fetch(`${path}/stats/${name}`).then(
-      (res) => res.json(),
-      (err) => window.console.log(err));
+      (res) => res.json());
 }
 
 /**
@@ -41,5 +39,5 @@ export function saveResults({path = SERVER_URL, data, name = DEFAULT_NAME}) {
 }
 
 export function preloadResourses(resource) {
-  fetch(resource);
+  return fetch(resource);
 }

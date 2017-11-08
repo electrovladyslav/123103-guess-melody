@@ -1,4 +1,4 @@
-import GameView from './gameView';
+import GameView from './game-view';
 import {LIVES_AMOUNT} from '../data/constants';
 
 export default class GameArtistView extends GameView {

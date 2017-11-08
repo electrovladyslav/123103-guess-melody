@@ -1,4 +1,4 @@
-import calcPoints from './calcPoints';
+import calcPoints from './calc-points';
 import assert from 'assert';
 
 describe(`On functions input `, () => {

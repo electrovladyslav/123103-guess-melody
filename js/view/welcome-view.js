@@ -1,4 +1,4 @@
-import AbstractView from './abstractView';
+import AbstractView from './abstract-view';
 import {LIVES_AMOUNT, TIME_AMOUNT} from '../data/constants';
 
 export default class WelcomeView extends AbstractView {
