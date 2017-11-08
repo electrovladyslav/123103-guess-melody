@@ -25,7 +25,7 @@ export default class {
       loadResults({})
           .then((results) => {
             this._view.otherResults = results;
-          }, () => {
+          }).catch(() => {
             window.console.log(`No possible to load statistics of other games. Mock statistic used.`);
             this._view.otherResults = OTHER_RESULTS_MOCK;
           })
@@ -39,8 +39,8 @@ export default class {
                 points: this._view.points
               }
             });
-          }, (err) => {
-            window.console.log(err);
+          }).catch(() => {
+            window.console.log(`No possible to save statistics of your game.`);
           });
 
     } else {

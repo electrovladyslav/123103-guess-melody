@@ -1,5 +1,5 @@
 import GameView from './game-view';
-import {LIVES_AMOUNT} from '../data/constants';
+
 
 export default class GameArtistView extends GameView {
   constructor(state) {
@@ -7,39 +7,7 @@ export default class GameArtistView extends GameView {
   }
 
   get template() {
-    const timeMins = Math.floor(this._state.time / 60);
-    let timeSecs = this._state.time % 60;
-    if (timeSecs < 10) {
-      timeSecs = `0` + timeSecs;
-    }
-
-    let livesString = ``;
-    if (LIVES_AMOUNT > this._state.lives) {
-      livesString += new Array(LIVES_AMOUNT - this._state.lives).fill(`<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`).join(``);
-    }
-
-    let stringTemplate = `
-    <section class="main main--level main--level-artist">
-      <svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
-        <circle
-          cx="390" cy="390" r="370"
-          class="timer-line"
-          style="filter: url(.#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"></circle>
-  
-        <div class="timer-value" xmlns="http://www.w3.org/1999/xhtml">
-          <span class="timer-value-mins">${timeMins}</span><!--
-          --><span class="timer-value-dots">:</span><!--
-          --><span class="timer-value-secs">${timeSecs}</span>
-        </div>
-      </svg>
-      
-      <div class="main-mistakes">
-         ${livesString}
-      </div>
-  
-      <div class="main-wrap">
-        <h2 class="title main-title">${this._level.question}</h2>
-        
+    let stringTemplate = `${this.headerString}
         <div class="player-wrapper">
           <div class="player">
             <audio src="${this._level.src}"></audio>

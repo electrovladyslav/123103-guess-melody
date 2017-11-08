@@ -116,3 +116,16 @@ export function renderScreen(element) {
     throw new RangeError(`There no input element (no-element).`);
   }
 }
+
+export function convertTime(timeDecimal) {
+  let timeSexagesimal = {
+    mins: Math.floor(timeDecimal / 60),
+    secs: timeDecimal % 60
+  };
+
+  if (timeSexagesimal.secs < 10) {
+    timeSexagesimal.secs = `0` + timeSexagesimal.secs;
+  }
+
+  return timeSexagesimal;
+}

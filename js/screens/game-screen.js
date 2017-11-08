@@ -62,21 +62,20 @@ class GameScreen {
   }
 
   checkAnswer(answeredValue) {
-    let isRight = true;
-
     if (this._level.type === `artist`) {
-      isRight = (answeredValue === this._view._level.rightAnswer);
+      return (answeredValue === this._view._level.rightAnswer);
     }
 
     if (this._level.type === `genre`) {
-      answeredValue.forEach((value) => {
-        if (value !== this._view._level.rightAnswer) {
-          isRight = false;
+      for (let i = 0; i < answeredValue.length; i += 1) {
+        if (answeredValue[i] !== this._view._level.rightAnswer) {
+          return false;
         }
-      });
+      }
+      return true;
     }
 
-    return isRight;
+    throw new TypeError(`Wrong type of the level`);
   }
 
   switchLevel(state) {
